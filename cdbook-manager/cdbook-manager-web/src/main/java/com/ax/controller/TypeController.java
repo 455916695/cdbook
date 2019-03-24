@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 @Controller
+@RequestMapping("/type")
 public class TypeController {
 
     @Autowired
@@ -18,7 +19,13 @@ public class TypeController {
     @RequestMapping("/findAll")
     @ResponseBody
     public List<TbType> findAll() {
-        return null;
+
+        try {
+            List<TbType> all = typeService.findAll();
+            return all;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

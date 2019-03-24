@@ -12,6 +12,15 @@
 
     <artifactId>cdbook-manager</artifactId>
     <packaging>pom</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.ax</groupId>
+            <artifactId>cdbook-comment</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
     <modules>
         <module>cdbook-manager-web</module>
         <module>cdbook-interface</module>
@@ -19,6 +28,8 @@
         <module>cdbook-pojo</module>
         <module>cdbook-dao</module>
     </modules>
+
+
     <!-- 配置tomcat插件 -->
     <build>
         <plugins>

@@ -10,57 +10,91 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 @Controller
+@RequestMapping("/bag")
 public class BookBagController {
 
     @Autowired
     private BookBagService bookBagService;
 
 
-    @RequestMapping("/addBookToBag")
+    @RequestMapping("/addBookToBags")
     @ResponseBody
-    public void addBookToBag(String bid, String bookId) {
-
+    public void addBookToBags(String bid, String bookId) {
+        try{
+            bookBagService.addBookToBag(bid,bookId);
+        }catch(Exception e){
+            throw new RuntimeException(e);
+        }
     }
 
 
     @RequestMapping("/addNotarize")
     @ResponseBody
     public void addNotarize(String bookId) {
+        try{
+            bookBagService.addNotarize(bookId);
+        }catch(Exception e){
+            throw new RuntimeException(e);
+        }
 
     }
 
 
-    @RequestMapping("/findLendingBook")
+    @RequestMapping("/findLendingBooks")
     @ResponseBody
-    public List<TbBook> findLendingBook(String bid) {
-        return null;
+    public List<TbBook> findLendingBooks(String bid) {
+        try{
+            List<TbBook> lendingBooks = bookBagService.findLendingBook(bid);
+            return lendingBooks;
+        }catch(Exception e){
+            throw new RuntimeException(e);
+        }
     }
 
 
-    @RequestMapping("/findLendBook")
+    @RequestMapping("/findLendBooks")
     @ResponseBody
-    public List<TbBook> findLendBook(String bid) {
-        return null;
+    public List<TbBook> findLendBooks(String bid) {
+        try{
+            List<TbBook> lendBooks = bookBagService.findLendBook(bid);
+            return lendBooks;
+        }catch(Exception e){
+            throw new RuntimeException(e);
+        }
     }
 
 
-    @RequestMapping("/findReturnBook")
+    @RequestMapping("/findReturnBooks")
     @ResponseBody
-    public List<TbBook> findReturnBook(String bid) {
-        return null;
+    public List<TbBook> findReturnBooks(String bid) {
+        try{
+            List<TbBook> returnBook = bookBagService.findReturnBook(bid);
+            return returnBook;
+        }catch(Exception e){
+            throw new RuntimeException(e);
+        }
     }
 
 
     @RequestMapping("/addReturnBook")
     @ResponseBody
     public void addReturnBook(String bid, String bookId) {
-
+        try{
+            bookBagService.addReturnBook(bid,bookId);
+        }catch(Exception e){
+            throw new RuntimeException(e);
+        }
     }
 
 
-    @RequestMapping("/addBookToBag")
+    @RequestMapping("/delete")
     @ResponseBody
     public void delete(String bid, String bookId) {
 
+        try{
+            bookBagService.delete(bid,bookId);
+        }catch(Exception e){
+            throw new RuntimeException(e);
+        }
     }
 }

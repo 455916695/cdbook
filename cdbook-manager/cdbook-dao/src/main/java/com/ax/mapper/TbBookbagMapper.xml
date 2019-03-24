@@ -69,6 +69,57 @@
   <sql id="Base_Column_List" >
     id, lib, book_id, create_time, update_time
   </sql>
+
+  <select id="selectBooKById" resultType="com.ax.pojo.TbBook" parameterType="java.lang.String">
+    select * from tb_book where id = #{bookId}
+  </select>
+
+  <update id="updateBook" parameterType="com.ax.pojo.TbBook" >
+    update tb_book
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null" >
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="isHot != null" >
+        is_hot = #{isHot,jdbcType=BIT},
+      </if>
+      <if test="besc != null" >
+        besc = #{besc,jdbcType=VARCHAR},
+      </if>
+      <if test="cid != null" >
+        cid = #{cid,jdbcType=VARCHAR},
+      </if>
+      <if test="bid != null" >
+        bid = #{bid,jdbcType=VARCHAR},
+      </if>
+      <if test="lid != null" >
+        lid = #{lid,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=BIT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=DATE},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <delete id="deleteBook" parameterType="java.lang.String" >
+    delete from tb_book
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExamples" parameterType="com.ax.pojo.TbBookcaseExample" >
+    delete from tb_bookcase
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ax.pojo.TbBookbagExample" >
     select
     <if test="distinct" >

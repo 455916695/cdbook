@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 @Controller
+@RequestMapping("/case")
 public class BookCaseController {
 
     @Autowired
@@ -18,13 +19,23 @@ public class BookCaseController {
     @RequestMapping("/addBookToCase")
     @ResponseBody
     public void addBookToCase(String lid, TbBook book) {
+        try {
+            bookCaseService.addBookToCase(lid,book);
+        }catch (Exception e){
+            throw new RuntimeException(e);
+        }
 
     }
 
     @RequestMapping("/findCaseBook")
     @ResponseBody
     public List<TbBook> findCaseBook(String lid) {
-        return null;
+        try {
+            List<TbBook> caseBook = bookCaseService.findCaseBook(lid);
+            return caseBook;
+        }catch (Exception e){
+            throw new RuntimeException(e);
+        }
     }
 
     @RequestMapping("/findLendingBook")

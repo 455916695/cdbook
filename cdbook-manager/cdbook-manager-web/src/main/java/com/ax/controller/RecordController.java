@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
+@RequestMapping("/record")
 public class RecordController {
 
     @Autowired
@@ -15,6 +16,11 @@ public class RecordController {
     @RequestMapping("/addLoanOut")
     @ResponseBody
     public void addLoanOut(String lid, String bookname, String bookId) {
+        try {
+            recordService.addLoanOut(lid,bookname,bookId);
+        }catch (Exception e){
+            throw new RuntimeException(e);
+        }
 
     }
 
@@ -22,6 +28,11 @@ public class RecordController {
     @ResponseBody
     public void addLoanIn(String bid, String bookname, String bookId) {
 
+        try {
+            recordService.addLoanIn(bid,bookname,bookId);
+        }catch (Exception e){
+            throw new RuntimeException(e);
+        }
     }
 
     @RequestMapping("/addReturn")

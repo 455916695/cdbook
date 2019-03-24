@@ -20,7 +20,7 @@ public class TbBook implements Serializable {
 
     private String lid;
 
-    private Boolean status;
+    private Integer status;
 
     private Date createTime;
 
@@ -90,11 +90,12 @@ public class TbBook implements Serializable {
         this.lid = lid == null ? null : lid.trim();
     }
 
-    public Boolean getStatus() {
+
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Boolean status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
@@ -113,4 +114,5 @@ public class TbBook implements Serializable {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+
 }

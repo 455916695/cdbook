@@ -1,5 +1,6 @@
 package com.ax.mapper;
 
+import com.ax.pojo.TbBook;
 import com.ax.pojo.TbBookcase;
 import com.ax.pojo.TbBookcaseExample;
 import org.apache.ibatis.annotations.Param;
@@ -28,4 +29,9 @@ public interface TbBookcaseMapper {
     int updateByPrimaryKeySelective(TbBookcase record);
 
     int updateByPrimaryKey(TbBookcase record);
+
+    TbBook selectBooKById(String bookId);
+
+    int deleteBook(String bookId);
+
 }

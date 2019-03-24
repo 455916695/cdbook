@@ -1,5 +1,6 @@
 package com.ax.mapper;
 
+import com.ax.pojo.TbBook;
 import com.ax.pojo.TbRecord;
 import com.ax.pojo.TbRecordExample;
 import org.apache.ibatis.annotations.Param;
@@ -28,4 +29,6 @@ public interface TbRecordMapper {
     int updateByPrimaryKeySelective(TbRecord record);
 
     int updateByPrimaryKey(TbRecord record);
+
+    TbBook selectBookByPrimaryKey(String id);
 }

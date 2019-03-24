@@ -262,6 +262,9 @@
                     <version>2.2</version>
                     <configuration>
                         <uriEncoding>UTF-8</uriEncoding>
+                        <!--   此处配置端口才有效果  -->
+                        <path>/</path>
+                        <port>8080</port>
                     </configuration>
                 </plugin>
             </plugins>

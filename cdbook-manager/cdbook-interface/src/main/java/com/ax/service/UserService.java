@@ -1,5 +1,6 @@
 package com.ax.service;
 
+import com.ax.entity.Result;
 import com.ax.pojo.TbUser;
 
 public interface UserService {
@@ -13,6 +14,6 @@ public interface UserService {
     /**
      * 2.注册
      */
-    void Register(TbUser user);
+    Result Register(TbUser user);
 
 }

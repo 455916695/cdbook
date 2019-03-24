@@ -2,6 +2,7 @@ package com.ax.pojo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.UUID;
 
 public class TbUser implements Serializable {
     private String id;
@@ -113,4 +114,5 @@ public class TbUser implements Serializable {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+
 }

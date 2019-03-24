@@ -12,7 +12,7 @@ public class TbRecord   implements Serializable {
 
     private String bookId;
 
-    private Boolean status;
+    private Integer status;
 
     private Date createTime;
 
@@ -50,11 +50,11 @@ public class TbRecord   implements Serializable {
         this.bookId = bookId == null ? null : bookId.trim();
     }
 
-    public Boolean getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Boolean status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
