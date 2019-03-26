@@ -1,5 +1,6 @@
 package com.ax.controller;
 
+import com.ax.entity.Result;
 import com.ax.pojo.TbBook;
 import com.ax.service.BookBagService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,88 +14,93 @@ import java.util.List;
 @RequestMapping("/bag")
 public class BookBagController {
 
-    @Autowired
-    private BookBagService bookBagService;
+  @Autowired private BookBagService bookBagService;
 
-
-    @RequestMapping("/addBookToBags")
-    @ResponseBody
-    public void addBookToBags(String bid, String bookId) {
-        try{
-            bookBagService.addBookToBag(bid,bookId);
-        }catch(Exception e){
-            throw new RuntimeException(e);
-        }
+  @RequestMapping("/addBookToBags")
+  @ResponseBody
+  public Result addBookToBags(String bid, String bookId) {
+    Result result = null;
+    try {
+      bookBagService.addBookToBag(bid, bookId);
+      result = new Result(true, "添加成功");
+    } catch (Exception e) {
+      result = new Result(false, e.getMessage());
     }
+    return result;
+  }
 
-
-    @RequestMapping("/addNotarize")
-    @ResponseBody
-    public void addNotarize(String bookId) {
-        try{
-            bookBagService.addNotarize(bookId);
-        }catch(Exception e){
-            throw new RuntimeException(e);
-        }
-
+  @RequestMapping("/addNotarize")
+  @ResponseBody
+  public Result addNotarize(String bookId) {
+    Result result = null;
+    try {
+      bookBagService.addNotarize(bookId);
+      result = new Result(true, "添加成功");
+    } catch (Exception e) {
+      result = new Result(false, e.getMessage());
     }
+    return result;
+  }
 
-
-    @RequestMapping("/findLendingBooks")
-    @ResponseBody
-    public List<TbBook> findLendingBooks(String bid) {
-        try{
-            List<TbBook> lendingBooks = bookBagService.findLendingBook(bid);
-            return lendingBooks;
-        }catch(Exception e){
-            throw new RuntimeException(e);
-        }
+  @RequestMapping("/findLendingBooks")
+  @ResponseBody
+  public List<TbBook> findLendingBooks(String bid) {
+    List<TbBook> lendingBooks = null;
+    try {
+      lendingBooks = bookBagService.findLendingBook(bid);
+    } catch (Exception e) {
+      e.getMessage();
     }
+    return lendingBooks;
+  }
 
-
-    @RequestMapping("/findLendBooks")
-    @ResponseBody
-    public List<TbBook> findLendBooks(String bid) {
-        try{
-            List<TbBook> lendBooks = bookBagService.findLendBook(bid);
-            return lendBooks;
-        }catch(Exception e){
-            throw new RuntimeException(e);
-        }
+  @RequestMapping("/findLendBooks")
+  @ResponseBody
+  public List<TbBook> findLendBooks(String bid) {
+    List<TbBook> lendBooks = null;
+    try {
+      lendBooks = bookBagService.findLendBook(bid);
+    } catch (Exception e) {
+      e.getMessage();
     }
+    return lendBooks;
+  }
 
-
-    @RequestMapping("/findReturnBooks")
-    @ResponseBody
-    public List<TbBook> findReturnBooks(String bid) {
-        try{
-            List<TbBook> returnBook = bookBagService.findReturnBook(bid);
-            return returnBook;
-        }catch(Exception e){
-            throw new RuntimeException(e);
-        }
+  @RequestMapping("/findReturnBooks")
+  @ResponseBody
+  public List<TbBook> findReturnBooks(String bid) {
+    List<TbBook> returnBook = null;
+    try {
+      returnBook = bookBagService.findReturnBook(bid);
+    } catch (Exception e) {
+      e.getMessage();
     }
+    return returnBook;
+  }
 
-
-    @RequestMapping("/addReturnBook")
-    @ResponseBody
-    public void addReturnBook(String bid, String bookId) {
-        try{
-            bookBagService.addReturnBook(bid,bookId);
-        }catch(Exception e){
-            throw new RuntimeException(e);
-        }
+  @RequestMapping("/addReturnBook")
+  @ResponseBody
+  public Result addReturnBook(String bid, String bookId) {
+    Result result = null;
+    try {
+      bookBagService.addReturnBook(bid, bookId);
+      result = new Result(true, "添加成功");
+    } catch (Exception e) {
+      result = new Result(false, e.getMessage());
     }
+    return result;
+  }
 
-
-    @RequestMapping("/delete")
-    @ResponseBody
-    public void delete(String bid, String bookId) {
-
-        try{
-            bookBagService.delete(bid,bookId);
-        }catch(Exception e){
-            throw new RuntimeException(e);
-        }
+  @RequestMapping("/delete")
+  @ResponseBody
+  public Result delete(String bid, String bookId) {
+    Result result = null;
+    try {
+      bookBagService.delete(bid, bookId);
+      result = new Result(true, "删除成功");
+    } catch (Exception e) {
+      result = new Result(false, e.getMessage());
     }
+    return result;
+  }
 }

@@ -13,19 +13,18 @@ import java.util.List;
 @RequestMapping("/type")
 public class TypeController {
 
-    @Autowired
-    private TypeService typeService;
+  @Autowired private TypeService typeService;
 
-    @RequestMapping("/findAll")
-    @ResponseBody
-    public List<TbType> findAll() {
+  @RequestMapping("/findAll")
+  @ResponseBody
+  public List<TbType> findAll() {
 
-        try {
-            List<TbType> all = typeService.findAll();
-            return all;
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+    List<TbType> all = null;
+    try {
+      all = typeService.findAll();
+    } catch (Exception e) {
+      e.getMessage();
     }
-
+    return all;
+  }
 }

@@ -16,53 +16,55 @@ import java.util.List;
 @RequestMapping("/book")
 public class BookController {
 
-    @Autowired
-    private BookService bookService;
+  @Autowired private BookService bookService;
 
-    @RequestMapping("/findHotBook")
-    @ResponseBody
-    public List<TbBook> findHotBook() {
-        try {
-            List<TbBook> hotBooks = bookService.findHotBook();
-            return hotBooks;
-        }catch (Exception e){
-            throw new RuntimeException(e);
-        }
+  @RequestMapping("/findHotBook")
+  @ResponseBody
+  public List<TbBook> findHotBook() {
+    List<TbBook> hotBooks = null;
+    try {
+      hotBooks = bookService.findHotBook();
+    } catch (Exception e) {
+      e.getMessage();
     }
+    return hotBooks;
+  }
 
-    @RequestMapping("/addBook")
-    @ResponseBody
-    public void addBook(TbBook book, HttpServletRequest request) {
-        try {
-            //获得上传书籍的用户id
-            book.setBid(((TbUser) request.getSession().getAttribute("user")).getId());
-            bookService.addBook(book);
-        }catch (Exception e){
-            throw new RuntimeException(e);
-        }
+  @RequestMapping("/addBook")
+  @ResponseBody
+  public Result addBook(TbBook book, HttpServletRequest request) {
+    Result result = null;
+    try {
+      // 获得上传书籍的用户id
+      book.setBid(((TbUser) request.getSession().getAttribute("user")).getId());
+      result = bookService.addBook(book);
+    } catch (Exception e) {
+      result = new Result(false, e.getMessage());
     }
+    return result;
+  }
 
-    @RequestMapping("/findBookByType")
-    @ResponseBody
-    public List<TbBook> findBookByType(String cid) {
-        try {
-            List<TbBook> booksByType = bookService.findBookByType(cid);
-            return booksByType;
-
-        }catch (Exception e){
-            throw new RuntimeException(e);
-        }
+  @RequestMapping("/findBookByType")
+  @ResponseBody
+  public List<TbBook> findBookByType(String cid) {
+    List<TbBook> booksByType = null;
+    try {
+      booksByType = bookService.findBookByType(cid);
+    } catch (Exception e) {
+      e.getMessage();
     }
+    return booksByType;
+  }
 
-    @RequestMapping("/findBookById")
-    @ResponseBody
-    public TbBook findBookById(String id) {
-        try {
-            TbBook book = bookService.findBookById(id);
-            return book;
-        }catch (Exception e){
-            throw new RuntimeException(e);
-        }
-
+  @RequestMapping("/findBookById")
+  @ResponseBody
+  public TbBook findBookById(String id) {
+    TbBook book = null;
+    try {
+      book = bookService.findBookById(id);
+    } catch (Exception e) {
+      e.getMessage();
     }
+    return book;
+  }
 }

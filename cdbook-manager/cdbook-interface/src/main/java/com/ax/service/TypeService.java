@@ -6,11 +6,6 @@ import java.util.List;
 
 public interface TypeService {
 
-
-    /**
-     * 1.查询所有分类
-     */
-    List<TbType> findAll();
-
-
+  /** 1.查询所有分类 */
+  List<TbType> findAll();
 }
