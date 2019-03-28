@@ -20,9 +20,18 @@ public class BookServiceImpl implements BookService {
 
   @Override
   public List<TbBook> findHotBook() {
-    TbBookExample tbBookExample = new TbBookExample();
-    tbBookExample.createCriteria().andIsHotEqualTo(true);
-    List<TbBook> tbBooks = bookMapper.selectByExample(tbBookExample);
+    //    TbBookExample tbBookExample = new TbBookExample();
+    //    tbBookExample.createCriteria().andIsHotEqualTo(true);
+    //    List<TbBook> tbBooks = bookMapper.selectByExample(tbBookExample);
+    List<TbBook> tbBooks = bookMapper.selectHottestBooks();
+    return tbBooks;
+  }
+
+  public List<TbBook> findLatestBooks() {
+    //    TbBookExample tbBookExample = new TbBookExample();
+    //    tbBookExample.createCriteria().andIsHotEqualTo(true);
+    //    List<TbBook> tbBooks = bookMapper.selectByExample(tbBookExample);
+    List<TbBook> tbBooks = bookMapper.selectLatestBooks();
     return tbBooks;
   }
 

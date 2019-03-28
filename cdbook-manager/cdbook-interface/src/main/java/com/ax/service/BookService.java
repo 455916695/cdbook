@@ -18,4 +18,7 @@ public interface BookService {
 
   /** * 4.查询指定书本详情 （根据书的id） */
   TbBook findBookById(String id);
+
+  /** 查询最新书籍 */
+  public List<TbBook> findLatestBooks();
 }

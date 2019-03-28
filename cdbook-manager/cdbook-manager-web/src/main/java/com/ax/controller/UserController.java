@@ -34,8 +34,9 @@ public class UserController {
     if (user != null && !StringUtils.isEmpty(user.getId())) {
       request.getSession().setAttribute("user", user);
       result = new Result(true, "登录成功", user);
+
     } else {
-      result = new Result(false, "登录失败:用户名或密码错误");
+      result = new Result(false, "用户名或密码错误");
     }
 
     return result;

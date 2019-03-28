@@ -1,4 +1,4 @@
-<%--
+<%@ page import="com.ax.pojo.TbUser" %><%--
   Created by IntelliJ IDEA.
   User: ax
 
@@ -12,6 +12,16 @@
     <title>Title</title>
 </head>
 <body>
-    Hello
+<%
+    TbUser user = new TbUser();
+    user.setId("2");
+    request.getSession().setAttribute("user", user);
+%>
+<form action="/book/addBook" method="post">
+    书名：<input type="text" name="name"></br>
+    图片：<input type="text" name="image"></br>
+    类型：<input type="text" name="cid"></br>
+    <input type="submit" value="添加">
+</form>
 </body>
 </html>
