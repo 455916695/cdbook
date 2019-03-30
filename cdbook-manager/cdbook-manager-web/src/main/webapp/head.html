@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/parm.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".megamenu").megamenu();
+            $.ajax({
+                url: "type/findAll.do",
+                type: "POST",
+                data: {},
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+                    $("#typeOfBook").append("<li class=\"active grid\"><a href=\"index.html\" id=\"indexType\">主页</a></li>");
+                    for (var i = 0; i < data.length; i++) {
+                        var dataVar = "<li><a class=\"color7\" onclick=\"clickType(this," + data[i].id + ")\" href=\"javascript:void(0);\">" + data[i].name + "</a></li>";
+                        $("#typeOfBook").append(dataVar);
+                    }
+                }
+            });
+        });
+    </script>
+    <!--点击事件函数-->
+    <script type="text/javascript">
+        function clickType(data, id) {
+            $.cookie("typeName", data.text);
+            $.cookie("typeId", id);
+            window.location = "showBook.html";
+        }
+    </script>
+</head>
+<body>
+</div>
+<div class="header-top">
+    <div class="wrap">
+        <div class="header-top-left">
+            <div class="box">
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="cssmenu">
+            <ul>
+                <li class="active"><a href="browse.html">浏览记录</a></li>
+                |
+                <li><a href="checkout.html">书架</a></li>
+                |
+                <li><a href="checkbag.html">书包</a></li>
+                |
+                <li><a href="login.html">登录</a></li>
+                |
+                <li><a href="register.html">注册</a></li>
+            </ul>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+<div class="header-bottom">
+    <div class="wrap">
+        <div class="header-bottom-left">
+            <!--logo图标-->
+            <div class="logo">
+                <a href="index.html"><img src="images/logo.png" alt=""/></a>
+            </div>
+            <div class="menu">
+                <ul class="megamenu skyblue" id="typeOfBook">
+
+
+                </ul>
+            </div>
+        </div>
+        <div class="header-bottom-right">
+
+            <div class="tag-list">
+                <div class="search">
+                    <input type="text" id="SerachText" name="s" class="textbox" value="Search"
+                           onfocus="this.value = '';"
+                           onblur="if (this.value == '') {this.value = 'Search';}">
+                    <input type="submit" value="Subscribe" onclick="searceMH($('#SerachText').val())" id="submit"
+                           name="submit">
+
+                    <div id="response"></div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <script type="text/javascript">
+        function searceMH(val) {
+            if (val !== null && val != "") {
+
+            }
+        }
+    </script>
+</div>
+</body>
+</html>

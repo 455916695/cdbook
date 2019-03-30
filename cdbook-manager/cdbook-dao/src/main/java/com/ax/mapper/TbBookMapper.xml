@@ -99,14 +99,14 @@
         where id = #{id,jdbcType=VARCHAR}
     </select>
 
-    <!--查询最热商品-->
+    <!--查询最热书籍-->
     <select id="selectHottestBooks" resultType="com.ax.pojo.TbBook">
         select
          id, name, image, is_hot, besc
         from tb_book where is_hot = 1 LIMIT 0,6
     </select>
 
-    <!--查询最新商品-->
+    <!--查询最新书籍-->
     <select id="selectLatestBooks" resultType="com.ax.pojo.TbBook">
        select
         id, name, image, is_hot, besc

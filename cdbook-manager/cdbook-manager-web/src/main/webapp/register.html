@@ -76,29 +76,54 @@
         <h4 class="title">注册</h4>
         <form>
             <div class="col_1_of_2 span_1_of_2">
-                <div><input type="text" value="用户名" onfocus="this.value = '';"
-                            onblur="if (this.value == '') {this.value = 'username';}"></div>
-                <div><input type="text" value="身份证" onfocus="this.value = '';"
-                            onblur="if (this.value == '') {this.value = 'idCard';}"></div>
-                <div><input type="text" value="QQ" onfocus="this.value = '';"
-                            onblur="if (this.value == '') {this.value = 'qq';}"></div>
-                <div><input type="text" value="密码" onfocus="this.value = '';"
-                            onblur="if (this.value == '') {this.value = 'password';}"></div>
+                <div>用户名：<input id="username" type="text" name="username" required="required"
+                                onfocus="this.value = '';"
+                                onblur="if (this.value == '') {this.value = 'username';}"></div>
+                <div>密 码：<input id="password" type="text" required="required" name="password"
+                                onfocus="this.value = '';"
+                                onblur="if (this.value == '') {this.value = 'password';}"></div>
+                <div>Q Q：<input id="qq" type="text" name="qq" onfocus="this.value = '';"
+                                onblur="if (this.value == '') {this.value = 'qq';}"></div>
             </div>
             <div class="col_1_of_2 span_1_of_2">
-                <div><input type="text" value="姓名" onfocus="this.value = '';"
+                <div><input id="name" type="text" name="name" onfocus="this.value = '';"
                             onblur="if (this.value == '') {this.value = 'name';}"></div>
-                <div><input type="text" value="地址" onfocus="this.value = '';"
-                            onblur="if (this.value == '') {this.value = 'adress';}"></div>
-                <div><input type="text" value="联系电话" onfocus="this.value = '';"
+                <div><input id="telephone" type="text" name="telephone" onfocus="this.value = '';"
                             onblur="if (this.value == '') {this.value = 'telephone';}"></div>
-                <div><input type="text" value="性別" onfocus="this.value = '';"
+                <div><input id="sex" type="text" name="sex" onfocus="this.value = '';"
                             onblur="if (this.value == '') {this.value = 'sex';}"></div>
             </div>
-            <button class="grey">注册</button>
+            <div><span id="errorInfo" hidden="hidden"></span></div>
+            <button class="grey" onclick="registe()">注册</button>
             <!--<p class="terms">By clicking 'Create Account' you agree to the <a href="#">Terms &amp; Conditions</a>.</p>-->
             <div class="clear"></div>
         </form>
+        <script type="text/javascript">
+            function registe() {
+                $.ajax({
+                    url: "user/register.do",
+                    type: "POST",
+                    data: {
+                        username: $("#username").val(),
+                        password: $("#password").val(),
+                        qq: $("#qq").val(),
+                        name: $("#name").val(),
+                        telephone: $("#telephone").val(),
+                        sex: $("#sex").val(),
+                    },
+                    dataType: "json",
+                    cache: false,
+                    success: function (data) {
+                        if (data.success) {
+                            window.location.href = "login.html";
+                        } else {
+                            $("#errorInfo").html(data.message);
+                            $("#errorInfo").show();
+                        }
+                    }
+                });
+            }
+        </script>
     </div>
 </div>
 <div class="footer">

@@ -1,0 +1,185 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Other</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="css/form.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href='http//fonts.googleapis.com/css?family=Exo+2' rel='stylesheet' type='text/css'>
+    <script src="js/jquery1.min.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+    <!-- start menu -->
+    <link href="css/megamenu.css" rel="stylesheet" type="text/css" media="all"/>
+
+    <script src="js/parm.js"></script>
+    <script type="text/javascript" src="js/megamenu.js"></script>
+    <script>$(document).ready(function () {
+        $(".megamenu").megamenu();
+        // 添加头
+        $(".header").load("head.html");
+        var typeName = $.cookie("typeName");
+        var typeId = $.cookie("typeId");
+        var uid = $.cookie("uid");
+        alert(uid);
+        $("#typeBook").prepend("<h2 class=\"head\">" + typeName + "</h2>");
+
+        // /*获得session中的对象*/
+        // $.ajax({
+        //     url: "user/getUser.do",
+        //     type: "POST",
+        //     data: {},
+        //     dataType: "json",
+        //     cache: false,
+        //     success: function (data) {
+        //         user = data;
+        //         alert(data)
+        //     }
+        // });
+
+        $.ajax({
+            url: "book/findBookPage.do",
+            type: "POST",
+            data: {cid: typeId},
+            dataType: "json",
+            cache: false,
+            success: function (data) {
+                var total = data.total;
+                data = data.row;
+                for (var i = 0; i < data.length; i++) {
+
+                    var dataStr = "  <div class=\"col_1_of_3 span_1_of_3\">\n" +
+                        "                        <a href=\"#\">\n" +
+                        "                            <div class=\"inner_content clearfix\">\n" +
+                        "                                <div class=\"product_image\">\n" +
+                        "                                    <img src=\" " + data[i].image + "\" alt=\"\"/>\n" +
+                        "                                </div>\n" +
+                        "                                <div class=\"price\">\n" +
+                        "                                    <div class=\"cart-left\">\n" +
+                        "                                        <p class=\"title\">" + data[i].name + "</p>\n" +
+                        "                                    </div>\n" +
+                        "                                    <div class=\"cart-right\" onclick='addBook(\" " + data[i].id + " \")'></div>\n" +
+                        "                                    <div class=\"clear\"></div>\n" +
+                        "                                </div>\n" +
+                        "                            </div>\n" +
+                        "                        </a>\n" +
+                        "                    </div>";
+
+                    if (i == 2) {
+                        dataStr = dataStr + "</div> <div class=\"clear\"></div>  <div class=\"top-box\" id=\"typeBookTwo\">";
+                    }
+                    if (i == 5) {
+                        dataStr = dataStr + "</div> <div class=\"clear\"></div>  <div class=\"top-box\" id=\"typeBookThre\">";
+                    }
+                    if (i < 3) {
+                        $("#typeBookOne").append(dataStr);
+                    } else {
+                        if (i < 6) {
+                            $("#typeBookTwo").append(dataStr);
+                        } else {
+                            $("#typeBookThre").append(dataStr);
+                        }
+                    }
+
+                }
+            }
+        });
+    });</script>
+    <script type="text/javascript" src="js/jquery.jscrollpane.min.js"></script>
+    <script type="text/javascript" id="sourcecode">
+        /* 加载右上方小轮播图*/
+        $(function () {
+            $('.scroll-pane').jScrollPane();
+        });
+
+
+    </script>
+</head>
+<body>
+
+<div class="header"></div>
+
+<div class="mens">
+    <div class="main">
+        <div class="wrap">
+            <div class="cont span_2_of_3" id="typeBook">
+                <div class="mens-toolbar">
+                    <div class="sort">
+                        <div class="sort-by">
+                            <label>排列方式</label>
+                            <select>
+                                <option value="">
+                                    名称
+                                </option>
+                                <option value="">
+                                    时间
+                                </option>
+                            </select>
+                            <a href=""><img src="images/arrow2.gif" alt="" class="v-middle"></a>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <!--图片分类展示-->
+                <div class="top-box" id="typeBookOne">
+                </div>
+            </div>
+            <div class="slider-wrapper theme-default">
+                <div id="slider" class="nivoSlider">
+                    <img src="images/t-img1.jpg" alt=""/>
+                    <img src="images/t-img2.jpg" alt=""/>
+                    <img src="images/t-img3.jpg" alt=""/>
+                </div>
+            </div>
+            <!--<div class="btn"><a href="single.html">Check it Out</a></div>-->
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+    function addBook(id) {
+        if (confirm("是否将该书籍加入书包？")) {
+            $.ajax({
+                url: "bag/addBookToBags.do",
+                type: "POST",
+                data: {
+                    bid: user.id,
+                    bookId: id
+                },
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+                    alert(data.message)
+                }
+            });
+        }
+    }
+</script>
+<script src="js/jquery.easydropdown.js"></script>
+<div class="footer">
+    <div class="footer-bottom">
+        <div class="wrap">
+            <div class="copy">
+                <p>Copyright &copy; 2014.Company name All rights reserved.<a target="_blank"
+                                                                             href="http//www.zjf88.com/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a>
+                </p>
+            </div>
+            <div class="f-list2">
+                <ul>
+                    <li class="active"><a href="about.html">关于我们</a></li>
+                    |
+                    <li><a href="delivery.html">服务条款</a></li>
+                    |
+                    <li><a href="contact.html">联系我们</a></li>
+                </ul>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+<div style="display:none">
+    <script src='http//v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script>
+</div>
+</body>
+</html>
